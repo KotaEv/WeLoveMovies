@@ -1,7 +1,7 @@
 
 
 exports.up = function (knex) {
-    return knex.schema.createTable("reviews", (table) => {
+    return knex.schema.createTable("reviews", function (table){
       table.increments("review_id").primary();
       table.text("content");
       table.integer("score").unsigned().notNullable();
