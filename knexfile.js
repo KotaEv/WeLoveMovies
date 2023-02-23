@@ -1,6 +1,14 @@
 require("dotenv").config();
 
-const DATABASE_URL = process.env;
+const {
+  NODE_ENV = "development",
+  DEVELOPMENT_DATABASE_URL,
+  PRODUCTION_DATABASE_URL,
+} = process.env;
+const URL =
+  NODE_ENV === "production"
+    ? PRODUCTION_DATABASE_URL
+    : DEVELOPMENT_DATABASE_URL;
 
 module.exports = {
   development: {
@@ -16,7 +24,7 @@ module.exports = {
 
   production: {
     client: "postgresql",
-    connection: process.env,
+    connection: URL,
     migrations: {
       directory: __dirname + "/src/db/migrations",
     },
