@@ -1,12 +1,14 @@
 require("dotenv").config();
 
-const {DATABASE_URL} = process.env;
+const {
+  NODE_ENV = "development",
+  DATABASE_URL,
+} = process.env;
 
 module.exports = {
   development: {
     client: "postgresql",
-    connection: DATABASE_URL,
-    pool: { min: 0, max: 5 },
+    connection: process.env,
     migrations: {
       directory: __dirname + "/src/db/migrations",
     },
@@ -17,8 +19,7 @@ module.exports = {
 
   production: {
     client: "postgresql",
-    connection: DATABASE_URL,
-    pool: { min: 0, max: 5 },
+    connection: process.env,
     migrations: {
       directory: __dirname + "/src/db/migrations",
     },
@@ -26,7 +27,6 @@ module.exports = {
       directory: __dirname + "/src/db/seeds",
     },
   },
-
   test: {
     client: "sqlite3",
     connection: {
