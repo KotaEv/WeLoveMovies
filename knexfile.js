@@ -13,7 +13,7 @@ const URL =
 module.exports = {
   development: {
     client: "postgresql",
-    connection: process.env,
+    connection: URL,
     migrations: {
       directory: __dirname + "/src/db/migrations",
     },
